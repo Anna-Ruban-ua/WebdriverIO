@@ -2,6 +2,7 @@
     "compilerOptions": {
         "moduleResolution": "node",
         "module": "ESNext",
+        "baseUrl": "./",
         "target": "es2022",
         "lib": [
             "es2022",
@@ -21,10 +22,11 @@
         "strict": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "noFallthroughCasesInSwitch": true
+        "noFallthroughCasesInSwitch": true,
+        "esModuleInterop": true
     },
     "include": [
-        "test",
+        "**/*.ts",
         "wdio.conf.ts"
     ]
 }
