@@ -4,12 +4,21 @@ export const config: WebdriverIO.Config = {
         './tests/specs/**/*.ts'
     ],
     exclude: [],
-    maxInstances: 10,
+    maxInstances: 1,
     capabilities: [{
-        browserName: process.env.BROWSER || 'chrome',
+      browserName: process.env.BROWSER || 'chrome',
+      'goog:chromeOptions': {
+        args: process.env.HEADLESS === 'true'
+          ? ['--headless', '--disable-gpu', '--no-sandbox', '--disable-dev-shm-usage']
+          : [],
+      },
+      'moz:firefoxOptions': {
+        args: process.env.HEADLESS === 'true' ? ['-headless'] : [],
+      }
     }],
     automationProtocol: 'webdriver',
     services: ['chromedriver'],
+    hostname: 'localhost',
     logLevel: 'error',
     bail: 0,
     baseUrl: 'https://telnyx.com',

@@ -6,7 +6,7 @@ describe('Currency Tests', () => {
     await messagingPage.openSolutionsPage();
     });
 
-  it('TC10 Should switch currency to EUR and see € in prices', async () => {
+  it('TC04 Switch currency to EUR', async () => {
     await messagingPage.switchCurrencyToEUR();
     expect(await messagingPage.getPriceText()).toContain(currencySymbols.eur);
   });

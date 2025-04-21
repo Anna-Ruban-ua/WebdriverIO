@@ -1,3 +1,4 @@
 node_modules
 notes.txt
-/allure-results/
+allure-results/
+allure-report/

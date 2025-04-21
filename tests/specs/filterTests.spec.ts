@@ -1,7 +1,7 @@
 import solutionsPage from "../pageobjects/solutionsPage.ts";
 
-describe('Solutions Filter Simple Test', () => {
-  it('TC08: Should apply and remove first filter', async () => {
+describe('Solutions Filter', () => {
+  it('TC08: Filter works correctly', async () => {
     await solutionsPage.openSolutionsPage();
     await solutionsPage.openFilterMenu();
 

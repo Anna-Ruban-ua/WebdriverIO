@@ -42,3 +42,24 @@ export const header = {
     menuName: "Developers",
   }
 };
+
+const commonHoverColor = "#3434ef";
+
+export const socialLinks = {
+  linkedin: {
+    name: "LinkedIn",
+    itemUrl: "https://www.linkedin.com/company/telnyx/",
+    hoverColorHex: commonHoverColor
+  },
+  twitter: {
+    name: "Twitter",
+    itemUrl: "https://twitter.com/telnyx",
+    expectedUrl: "https://x.com/telnyx",
+    hoverColorHex: commonHoverColor
+  },
+  facebook: {
+    name: "Facebook",
+    itemUrl: "https://www.facebook.com/Telnyx/",
+    hoverColorHex: commonHoverColor
+  }
+};
