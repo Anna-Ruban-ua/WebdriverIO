@@ -13,7 +13,7 @@ describe('Form Validation Tests', () => {
     });
   
     it('TC03: Invalid email shows validation error', async () => {
-      await homePage.fillContactWithUsFormWithInvalidEmail(generateInvalidEmail());
+      await homePage.fillContactWithUsForm(generateInvalidEmail());
       await expect(browser).not.toHaveUrlContaining(endpoints.signUp);   
     })
 

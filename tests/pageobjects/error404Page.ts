@@ -8,6 +8,7 @@ class Error404Page extends BasePage {
 
   async openInvalidPage() {
     await this.open(generateInvalidUrl());
+    await this.acceptCookiesIfVisible();
   }
 
   async isBackToHomeVisible() {
