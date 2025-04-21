@@ -1,3 +1,5 @@
+import { writeEnvProps } from './support/envWriter.js';
+
 export const config: WebdriverIO.Config = {
     runner: 'local',
     specs: [
@@ -34,5 +36,8 @@ export const config: WebdriverIO.Config = {
     mochaOpts: {
         ui: 'bdd',
         timeout: 180000
+    },
+    onPrepare: () => {
+      writeEnvProps();
     },
 };

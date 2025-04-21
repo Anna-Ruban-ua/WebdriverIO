@@ -22,11 +22,11 @@ Detailed test cases are documented in [this spreadsheet](https://docs.google.com
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/Anna-Ruban-ua/Task7_WebdriverIO
+   git clone https://github.com/Anna-Ruban-ua/WebdriverIO
    ```
 2. Navigate to the project directory:
    ```sh
-   cd Task7_WebdriverIO
+   cd WebdriverIO
    ```
 3. Install dependencies:
    ```sh
@@ -44,7 +44,6 @@ npm run test
 ```sh
 npm run test:chrome
 npm run test:firefox
-npm run test:edge
 ```
 
 ### Run tests in headless mode:
@@ -57,11 +56,6 @@ npm run test:firefox:headless
 ```sh
 npm run test:chrome:config
 npm run test:firefox:config
-```
-
-### Run specific test file:
-```sh
-npm run test:spec -- --spec tests/specs/<yourTest>.spec.ts
 ```
 
 ## Allure Report
