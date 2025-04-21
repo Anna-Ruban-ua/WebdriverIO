@@ -1,3 +1,6 @@
+import * as fs from 'fs';
+import path from 'path';
+
 export const config: WebdriverIO.Config = {
     runner: 'local',
     specs: [
@@ -36,9 +39,6 @@ export const config: WebdriverIO.Config = {
         timeout: 180000
     },
     onPrepare: () => {
-      const fs = require('fs');
-      const path = require('path');
-    
       const browser = process.env.BROWSER || 'chrome';
       const headless = process.env.HEADLESS?.trim() === 'true' ? 'true' : 'false';
       const platform = process.platform;
