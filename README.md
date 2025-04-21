@@ -62,7 +62,7 @@ npm run test:firefox:config
 
 ### Generate and open report locally:
 ```sh
-npm run allure:run&report
+npm run allure:run:report
 ```
 
 ## Docker
