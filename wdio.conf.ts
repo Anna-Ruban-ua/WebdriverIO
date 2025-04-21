@@ -1,5 +1,3 @@
-import { writeEnvProps } from './support/envWriter.js';
-
 export const config: WebdriverIO.Config = {
     runner: 'local',
     specs: [
@@ -38,6 +36,25 @@ export const config: WebdriverIO.Config = {
         timeout: 180000
     },
     onPrepare: () => {
-      writeEnvProps();
-    },
+      const fs = require('fs');
+      const path = require('path');
+    
+      const browser = process.env.BROWSER || 'chrome';
+      const headless = process.env.HEADLESS?.trim() === 'true' ? 'true' : 'false';
+      const platform = process.platform;
+      const nodeVersion = process.version;
+    
+      const content = `BROWSER=${browser}
+    HEADLESS=${headless}
+    PLATFORM=${platform}
+    NODE_VERSION=${nodeVersion}`;
+    
+      const envPath = path.resolve('./allure-results');
+      if (!fs.existsSync(envPath)) {
+        fs.mkdirSync(envPath, { recursive: true });
+      }
+    
+      fs.writeFileSync(path.join(envPath, 'environment.properties'), content);
+    }
+    
 };
