@@ -6,7 +6,7 @@ describe('Cookie Consent Banner', () => {
         await homePage.openHomePage();
     });
 
-    it('TC05 Accept Cookies', async () => {
+    it('TC06 Clear Cookies', async () => {
         expect(await homePage.getCookieByName(COOKIE_CONSENT_NAME)).toBeNull();
         await homePage.acceptCookiesIfVisible();
         await browser.refresh();

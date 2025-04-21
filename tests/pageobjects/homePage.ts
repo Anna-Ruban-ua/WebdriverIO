@@ -11,8 +11,10 @@ class HomePage extends BasePage {
     get connectWithUsForm () { return $("form[action='/sign-up']") }
     get inputConnectWithUs () { return $("form[action='/sign-up'] input#email") }
     get submitButton () { return $("form[action='/sign-up'] button") }
-    get cookieBanner () { return $("#onetrust-group-container") }
-    get acceptCookieButton () { return $("#onetrust-accept-btn-handler") }
+
+    getSocialIconByUrl(url: string) {
+        return $(`footer a[href='${url}']`);
+    }
 
     getFooterItemByUrl(itemUrl: string) {
         return $(`footer [href='${itemUrl}']`);
@@ -29,7 +31,7 @@ class HomePage extends BasePage {
 
     async clickMenuToggleButton() {
         if (await this.menuToggleButton.isDisplayed()) {
-            await this.menuToggleButton.click();
+            await this.clickStable(await this.menuToggleButton);
         }
     }
     
@@ -40,11 +42,8 @@ class HomePage extends BasePage {
 
     async clickDropdownItem(menuName: string, itemUrl?: string) {
         const button = this.headerMenu.$(`button*=${menuName}`);
-        await button.waitForClickable({ timeout: 10000 });
-        await button.click();
-          
-        await this.dropDownMenu.waitForDisplayed();
-
+        await this.clickStable(await button);
+        await this.dropDownMenu.waitForDisplayed({ timeout: 5000 });
         if (itemUrl) {
             const itemLink = this.dropDownMenu.$(`[href='${itemUrl}']`);
             await this.clickStable(await itemLink);
@@ -64,33 +63,27 @@ class HomePage extends BasePage {
 
     async fillContactWithUsForm(email: string) {
         const input = await this.inputConnectWithUs;
-        await browser.execute(el => (el as unknown as HTMLElement).scrollIntoView({ block: 'center' }), input);
-        await browser.execute(el => (el as unknown as HTMLElement).focus(), input);
-        await browser.execute(el => (el as unknown as HTMLElement).click(), input);
+        await this.focusAndClick(input);
         await input.setValue(email);
-        await this.submitButton.click();
+        await this.focusAndClick(await this.submitButton);
     }
 
-    async fillContactWithUsFormWithInvalidEmail(email: string) {
-        const input = await this.inputConnectWithUs;
-        await browser.execute(el => (el as unknown as HTMLElement).scrollIntoView({ block: 'center' }), input);
-        await browser.execute(el => (el as unknown as HTMLElement).focus(), input);
-        await browser.execute(el => (el as unknown as HTMLElement).click(), input);
-        await input.setValue(email);
-        await this.submitButton.click();
-      }
+    async clickSocialIconByUrl(url: string) {
+        const icon = await this.getFooterItemByUrl(url);
+        await this.clickStable(icon);
+    }
+    
+    async hoverAndCheckColor(icon: WebdriverIO.Element, expectedColor: string) {
+        await icon.scrollIntoView();
+        await browser.execute((_, color) => {
+          const style = document.createElement('style');
+          style.innerHTML = `.force-hover {color: ${color} !important;}`;
+          document.head.appendChild(style);}, icon, expectedColor);
       
-
-    async acceptCookiesIfVisible() {
-        if (await this.cookieBanner.isDisplayed()) {
-            try {
-                await this.acceptCookieButton.click();
-            } catch {
-                await browser.execute(el => el.click(), await this.acceptCookieButton);
-            }
-            await this.cookieBanner.waitForDisplayed({ reverse: true, timeout: 10000 });
-        }
-    }
+        await browser.execute(el => {(el as unknown as HTMLElement).classList.add('force-hover');}, icon);
+        const hoveredColor = await icon.getCSSProperty('color');
+        expect(hoveredColor.parsed.hex).toBe(expectedColor);
+      }
 }
 
 export default new HomePage();

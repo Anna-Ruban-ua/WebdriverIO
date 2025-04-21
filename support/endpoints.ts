@@ -1,6 +1,7 @@
 export const endpoints = {
     home: '/',
     signUp: '/sign-up',
+    messaging: '/pricing/messaging',
     
     products: '/products',
     solutions: '/solutions',

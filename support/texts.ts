@@ -10,3 +10,13 @@ export const error404Texts = {
   };
 
   export const overviewLinkText = "See overview";
+
+  export const currencySymbols = {
+    eur: '€',
+    usd: '$',
+  };
+
+  export const currencyLabels = {
+    eur: 'EUR',
+    usd: 'USD',
+  };

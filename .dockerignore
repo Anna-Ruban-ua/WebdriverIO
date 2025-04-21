@@ -1,0 +1,8 @@
+node_modules
+allure-results
+allure-report
+.git
+.gitignore
+Dockerfile
+docker-compose.yml
+notes.txt

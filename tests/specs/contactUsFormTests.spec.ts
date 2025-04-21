@@ -12,8 +12,8 @@ describe('Form Validation Tests', () => {
       await expect(browser).toHaveUrlContaining(endpoints.signUp);
     });
   
-    it('TC03: Invalid email shows validation error', async () => {
-      await homePage.fillContactWithUsFormWithInvalidEmail(generateInvalidEmail());
+    it('TC03: Invalid email does not redirect to sign-up', async () => {
+      await homePage.fillContactWithUsForm(generateInvalidEmail());
       await expect(browser).not.toHaveUrlContaining(endpoints.signUp);   
     })
 
